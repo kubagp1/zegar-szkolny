@@ -1,0 +1,33 @@
+{
+  "name": "zegar-szkolny",
+  "version": "1.0.0",
+  "description": "Clock with progress bar.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "parcel src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kubagp1/zegar-szkolny.git"
+  },
+  "keywords": [
+    "clock",
+    "school"
+  ],
+  "author": "kubagp",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kubagp1/zegar-szkolny/issues"
+  },
+  "homepage": "https://github.com/kubagp1/zegar-szkolny#readme",
+  "dependencies": {
+    "parcel": "^2.0.0-rc.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.3.5",
+    "parcel-bundler": "^1.12.5",
+    "postcss-modules": "^4.2.2",
+    "prettier": "^2.4.1"
+  }
+}
