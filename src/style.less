@@ -1,0 +1,70 @@
+:root {
+  --background-color: #111;
+  --clock-color: #eee;
+  --progress-background-color: #24264d;
+  --progress-filled-color: #e8cf43;
+  --progress-filled-tip: #5a62e8;
+
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  background-color: var(--background-color);
+
+  .clock {
+    color: var(--clock-color);
+
+    font-size: 35vw;
+
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+  }
+
+  .progress-container {
+    background-color: var(--progress-background-color);
+
+    position: absolute;
+    bottom: 0;
+
+    margin: 20px;
+
+    height: 35px;
+    width: calc(100% - 40px);
+
+    .progress-filled {
+      background-color: var(--progress-filled-color);
+      border-right-color: var(--progress-filled-tip);
+
+      width: 60%;
+      height: 100%;
+
+      border-right-width: 5px;
+      border-right-style: solid;
+
+      box-sizing: border-box;
+    }
+
+    .progress-info {
+      color: #eee;
+
+      font-size: 2em;
+
+      position: absolute;
+      top: 0;
+      transform: translateY(-100%);
+    }
+  }
+}
