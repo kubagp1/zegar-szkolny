@@ -1,4 +1,4 @@
-import { makeTimetable, Lesson } from './timetable'
+import Timetable from './timetable'
 
 interface App {
   dom: {
@@ -6,7 +6,9 @@ interface App {
     progressInfo: HTMLDivElement
     progressBar: HTMLDivElement
   }
-  timetable: Lesson[]
+  timetable: Timetable
+  loopInterval: NodeJS.Timer
+  timeOffset: number
 }
 
 class App {
@@ -17,41 +19,32 @@ class App {
       progressBar: document.querySelector('.progress-filled') as HTMLDivElement
     }
 
-    this.loadConfig()
+    this.timetable = new Timetable()
+
+    this.loopInterval = setInterval(this.loop.bind(this), 1000)
+
+    this.timeOffset = 0
   }
 
-  loadConfig(): void {
-    // var timetableJSON = localStorage.getItem('timetable')
-    var timetableJSON = `[
-      {"start": 25800, "end": 28500},
-      {"start": 28800, "end": 31500},
-      {"start": 32100, "end": 34800},
-      {"start": 35400, "end": 38100},
-      {"start": 39300, "end": 42000},
-      {"start": 42600, "end": 45300},
-      {"start": 45900, "end": 48600},
-      {"start": 49200, "end": 51900},
-      {"start": 52200, "end": 54900},
-      {"start": 55200, "end": 57900},
-      {"start": 58200, "end": 60900},
-      {"start": 61200, "end": 61100},
-      {"start": 64200, "end": 63900}
-    ]`
+  private _debugSetTime(time: string) {
+    var [hours, minutes]: any[] = time.split(':')
+    hours = parseInt(hours)
+    minutes = parseInt(minutes)
 
-    if (typeof timetableJSON == 'string') {
-      try {
-        const unvalidatedTimetable = JSON.parse(timetableJSON)
+    const targetTime = hours * 60 * 60 + minutes * 60
 
-        if (!Array.isArray(unvalidatedTimetable)) {
-          throw Error('Timetable from localStorage is not an array.')
-        }
+    this.timeOffset = targetTime - ((Date.now() / 1000) % 86400)
+  }
 
-        const timetable = makeTimetable(unvalidatedTimetable)
+  private getTime(): number {
+    return ((Date.now() / 1000) % 86400) + this.timeOffset
+  }
 
-        console.log(timetable)
-      } catch (error) {
-        console.error(error)
-      }
+  private loop() {
+    /* @ts-ignore */
+    if (this._debugFastForward) {
+      /* @ts-ignore */
+      this.timeOffset += this._debugFastForward
     }
   }
 }

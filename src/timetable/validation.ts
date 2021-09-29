@@ -1,30 +1,4 @@
-interface LessonPart {
-  start: number
-  end: number
-}
-
-export interface Lesson {
-  relativeStart: number
-  relativeEnd: number
-  absoluteStart: number
-  absoluteEnd: number
-}
-
-export const DEFAULT_TIMETABLE = [
-  { start: 25800, end: 28500 },
-  { start: 28800, end: 31500 },
-  { start: 32100, end: 34800 },
-  { start: 35400, end: 38100 },
-  { start: 39300, end: 42000 },
-  { start: 42600, end: 45300 },
-  { start: 45900, end: 48600 },
-  { start: 49200, end: 51900 },
-  { start: 52200, end: 54900 },
-  { start: 55200, end: 57900 },
-  { start: 58200, end: 60900 },
-  { start: 61200, end: 61100 },
-  { start: 64200, end: 63900 }
-]
+import { Lesson, LessonPart } from '.'
 
 function convertTimetableToRelative(timetable: LessonPart[]): LessonPart[] {
   const firstLessonStart = timetable[0].start
@@ -55,10 +29,10 @@ function convertTimetableToRelative(timetable: LessonPart[]): LessonPart[] {
 }
 
 /** Validates absolute timetable and returns full timetable. */
-export function makeTimetable(unvalidatedTimetable: any[]): Lesson[] {
+export function constructTimetable(unvalidatedTimetable: any[]): Lesson[] {
   var validatedTimetable: LessonPart[] = []
 
-  // validate that every time is possible (0:00 > x > 24:00)
+  // validate, that every entry is possible (0:00 > x > 24:00)
   for (const lesson of unvalidatedTimetable) {
     if (
       typeof lesson?.start == 'number' &&

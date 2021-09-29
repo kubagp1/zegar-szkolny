@@ -2,4 +2,10 @@ import './style.less'
 
 import App from './App'
 
-var app = new App()
+declare global {
+  interface Window {
+    app: App
+  }
+}
+
+window.app = new App()
