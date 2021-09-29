@@ -132,7 +132,7 @@ class Timetable {
     }
   }
 
-  public secondsFromLessonBeggining(absoluteSeconds: number) {
+  public secondsSinceLessonStart(absoluteSeconds: number) {
     const seconds = this.getRelativeTime(absoluteSeconds)
 
     if (this.onBreak(absoluteSeconds)) {
@@ -144,7 +144,7 @@ class Timetable {
     return seconds - latestLesson.relativeStart
   }
 
-  public secondsToNextLesson(absoluteSeconds: number) {
+  public secondsToNextLessonStart(absoluteSeconds: number) {
     const seconds = this.getRelativeTime(absoluteSeconds)
 
     if (this.onLesson(absoluteSeconds)) {

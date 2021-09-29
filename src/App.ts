@@ -1,25 +1,25 @@
 import Timetable from './timetable'
+import DOM from './dom'
+import { DOMUpdate } from './dom'
+import Info from './info'
 
 interface App {
-  dom: {
-    clock: HTMLDivElement
-    progressInfo: HTMLDivElement
-    progressBar: HTMLDivElement
-  }
   timetable: Timetable
+  dom: DOM
+  info: Info
   loopInterval: NodeJS.Timer
   timeOffset: number
 }
 
+function secondsSinceMidnight(): number {
+  return (<any>new Date() - <any>new Date().setHours(0, 0, 0, 0)) / 1000
+}
+
 class App {
   constructor() {
-    this.dom = {
-      clock: document.querySelector('.clock') as HTMLDivElement,
-      progressInfo: document.querySelector('.progress-info') as HTMLDivElement,
-      progressBar: document.querySelector('.progress-filled') as HTMLDivElement
-    }
-
     this.timetable = new Timetable()
+    this.dom = new DOM()
+    this.info = new Info(this.timetable)
 
     this.loopInterval = setInterval(this.loop.bind(this), 1000)
 
@@ -33,11 +33,11 @@ class App {
 
     const targetTime = hours * 60 * 60 + minutes * 60
 
-    this.timeOffset = targetTime - ((Date.now() / 1000) % 86400)
+    this.timeOffset = targetTime - secondsSinceMidnight()
   }
 
   private getTime(): number {
-    return ((Date.now() / 1000) % 86400) + this.timeOffset
+    return (secondsSinceMidnight() + this.timeOffset) % 86400
   }
 
   private loop() {
@@ -46,6 +46,21 @@ class App {
       /* @ts-ignore */
       this.timeOffset += this._debugFastForward
     }
+
+    const time = this.getTime()
+
+    var DOMUpdate: DOMUpdate = {}
+
+    DOMUpdate.hours = Math.floor(time / 3600)
+    DOMUpdate.minutes = Math.floor((time / 60) % 60)
+      .toString()
+      .padStart(2, '0')
+
+    DOMUpdate.progress = this.timetable.getProgress(time)
+
+    DOMUpdate.info = this.info.generate(time)
+
+    this.dom.update(DOMUpdate)
   }
 }
 

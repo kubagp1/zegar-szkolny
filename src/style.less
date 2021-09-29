@@ -48,8 +48,10 @@ body {
       background-color: var(--progress-filled-color);
       border-right-color: var(--progress-filled-tip);
 
-      width: 60%;
+      width: var(--width);
       height: 100%;
+
+      transition: width linear 1s;
 
       border-right-width: 5px;
       border-right-style: solid;
