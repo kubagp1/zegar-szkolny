@@ -20,10 +20,11 @@ class App {
     this.timetable = new Timetable()
     this.dom = new DOM()
     this.info = new Info(this.timetable)
-
-    this.loopInterval = setInterval(this.loop.bind(this), 1000)
-
+    
     this.timeOffset = 0
+
+    this.loop()
+    this.loopInterval = setInterval(this.loop.bind(this), 1000)
   }
 
   private _debugSetTime(time: string) {
@@ -40,7 +41,7 @@ class App {
     return (secondsSinceMidnight() + this.timeOffset) % 86400
   }
 
-  private loop() {
+  private loop(): void {
     /* @ts-ignore */
     if (this._debugFastForward) {
       /* @ts-ignore */
