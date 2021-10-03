@@ -1,4 +1,4 @@
 # zegar-szkolny
 A clock with progress bar.
 
-Demo is available [here](clockandballs.tk).
+Demo is available [here](https://clockandballs.tk).
