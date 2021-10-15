@@ -10,7 +10,6 @@
     <script src="./client/index.ts" defer></script>
   </head>
   <body>
-    <div id="preferences"></div>
     <div class="main-container">
       <div class="clock">
         <span id="hours">21</span>:<span id="minutes">37</span>
@@ -19,6 +18,18 @@
         <div class="progress-filled"></div>
         <div class="progress-info">Lorem ipsum 34 amet</div>
       </div>
+    </div>
+
+    <div id="preferences-container">
+      <iframe
+        id="preferences"
+        src="/preferences.html"
+        width="850"
+        height="500"
+        frameborder="0"
+      >
+        There was a problem with loading preferences!
+      </iframe>
     </div>
   </body>
 </html>

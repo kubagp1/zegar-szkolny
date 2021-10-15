@@ -1,4 +1,4 @@
-import Setting from './setting'
+import Setting from './Setting'
 
 export default interface Settings {
   showLogoOnStartup: Setting<boolean>
@@ -34,7 +34,7 @@ export function makeSettings(parent: Parent): Settings {
     showLogoOnStartup: {
       setValue: (newValue: boolean) =>
         parent.setValue('showLogoOnStartup', newValue),
-      getValue: () => parent.getValue('showLogoOnStartup'),
+      getValue: async () => await parent.getValue('showLogoOnStartup'),
       title: 'Show logo on startup'
     },
     colors: {

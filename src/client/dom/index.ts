@@ -3,6 +3,7 @@ export interface DOMUpdate {
   minutes?: string | number
   progress?: number
   info?: string
+  theme?: 'default' | 'alternative'
 }
 
 export default class DOM {
@@ -43,5 +44,29 @@ export default class DOM {
     if (update.info !== undefined) {
       this.dom.progressInfo.innerText = update.info
     }
+
+    if (update.theme !== undefined) {
+      setCSSVariable('clock-color', `var(--${update.theme}-clock-color)`)
+      setCSSVariable(
+        'background-color',
+        `var(--${update.theme}-background-color)`
+      )
+      setCSSVariable(
+        'progress-background-color',
+        `var(--${update.theme}-progress-background-color)`
+      )
+      setCSSVariable(
+        'progress-filled-color',
+        `var(--${update.theme}-progress-filled-color)`
+      )
+      setCSSVariable(
+        'progress-tip-color',
+        `var(--${update.theme}-progress-tip-color)`
+      )
+    }
   }
+}
+
+function setCSSVariable(key: string, value: string) {
+  document.documentElement.style.setProperty(`--${key}`, value)
 }

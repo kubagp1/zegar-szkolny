@@ -8,8 +8,10 @@ import Preferences from './Preferences.vue'
 import { makeSettings, Parent } from './settings'
 import Settings from './settings'
 
+Vue.config.productionTip = false
+Vue.config.devtools = false
+
 const connection = connectToParent({
-  // Methods child is exposing to parent
   methods: {}
 })
 

@@ -10,7 +10,7 @@
     </v-list-item-content>
 
     <v-list-item-action>
-      <v-switch :value="setting.getValue()" @change="setting.setValue" />
+      <v-switch v-model="value" />
     </v-list-item-action>
   </v-list-item>
 </template>
@@ -19,12 +19,28 @@
 import Vue from 'vue'
 import { PropType } from 'vue'
 
-import Setting from '../setting'
+import Setting from '../Setting'
 
 export default Vue.extend({
   props: {
     setting: {
+      required: true,
       type: Object as PropType<Setting<boolean>>
+    }
+  },
+  data: () => ({
+    value: false,
+    firstFetch: true
+  }),
+  mounted() {
+    this.setting.getValue().then((value) => {
+      this.value = value
+    })
+  },
+  watch: {
+    value(newValue: boolean) {
+      if (this.firstFetch) this.firstFetch = false
+      else this.setting.setValue(newValue)
     }
   }
 })

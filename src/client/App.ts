@@ -64,6 +64,8 @@ class App {
 
     DOMUpdate.info = this.info.generate(time)
 
+    DOMUpdate.theme = this.timetable.onBreak(time) ? 'alternative' : 'default'
+
     this.dom.update(DOMUpdate)
   }
 }

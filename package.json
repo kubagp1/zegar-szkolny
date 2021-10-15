@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@mdi/font": "^6.2.95",
+    "dotty": "^0.1.1",
     "object-resolve-path": "^1.1.1",
     "penpal": "^6.1.0",
     "vue": "^2.6.14",

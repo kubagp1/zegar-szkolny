@@ -57,8 +57,14 @@
 
     <v-main>
       <v-container>
-        <v-expand-transition>
-          <component :is="selectedCategory" />
+        <v-expand-transition
+          v-for="category in categories"
+          :key="category.component"
+        >
+          <component
+            :is="category.component"
+            v-show="selectedCategory == category.component"
+          />
         </v-expand-transition>
       </v-container>
     </v-main>
@@ -70,9 +76,10 @@ import Vue from 'vue'
 
 import GeneralCategory from './categories/General.vue'
 import ColorsCategory from './categories/Colors.vue'
+import AppearanceCategory from './categories/Appearance.vue'
 
 export default Vue.extend({
-  components: { GeneralCategory, ColorsCategory },
+  components: { GeneralCategory, ColorsCategory, AppearanceCategory },
   data: () => ({
     categories: [
       {
