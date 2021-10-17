@@ -132,13 +132,15 @@ class Settings {
       showProgressBar: {
         ...new Setting(config.appearance.showProgressBar),
         applySetting() {
-          console.warn('missing implementation!')
+          if (this.value == false) (document.querySelector('.progress-container') as HTMLDivElement).style.setProperty('display', 'none')
+          else (document.querySelector('.progress-container') as HTMLDivElement).style.setProperty('display', 'initial')
         }
       },
       showProgressBarTip: {
         ...new Setting(config.appearance.showProgressBarTip),
         applySetting() {
-          console.warn('missing implementation!')
+          if (this.value == false) (document.querySelector('.progress-filled') as  HTMLDivElement).style.setProperty('border-right-style', 'none')
+          else (document.querySelector('.progress-filled') as  HTMLDivElement).style.setProperty('border-right-style', 'solid')
         }
       }
     }

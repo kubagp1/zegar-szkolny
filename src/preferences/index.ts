@@ -19,6 +19,7 @@ connection.promise.then((parent) => {
   var settings = makeSettings(parent as unknown as Parent)
 
   Vue.prototype.$settings = settings
+  Vue.prototype.$top = parent
 
   new Vue({
     el: '#preferences',

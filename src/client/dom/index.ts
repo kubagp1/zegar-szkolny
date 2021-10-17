@@ -13,6 +13,10 @@ export default class DOM {
     minutes: HTMLSpanElement
     progressInfo: HTMLDivElement
     progressBar: HTMLDivElement
+    fullscreenButton: HTMLSpanElement
+    preferencesButton: HTMLSpanElement
+    preferencesContainer: HTMLDivElement
+    iframe: HTMLIFrameElement
   }
 
   constructor() {
@@ -21,8 +25,48 @@ export default class DOM {
       hours: document.querySelector('#hours') as HTMLSpanElement,
       minutes: document.querySelector('#minutes') as HTMLSpanElement,
       progressInfo: document.querySelector('.progress-info') as HTMLDivElement,
-      progressBar: document.querySelector('.progress-filled') as HTMLDivElement
+      progressBar: document.querySelector('.progress-filled') as HTMLDivElement,
+      fullscreenButton: document.querySelector(
+        '#open-fullscreen'
+      ) as HTMLSpanElement,
+      preferencesButton: document.querySelector(
+        '#open-preferences'
+      ) as HTMLSpanElement,
+      preferencesContainer: document.querySelector(
+        '#preferences-container'
+      ) as HTMLDivElement,
+      iframe: document.querySelector('iframe#preferences') as HTMLIFrameElement
     }
+
+    this.dom.fullscreenButton.addEventListener('click', () => {
+      document.documentElement.requestFullscreen()
+    })
+
+    let resizeHandler = () => {
+      if (window.innerHeight == screen.height) {
+        document.documentElement.classList.add('fullscreen')
+      } else {
+        document.documentElement.classList.remove('fullscreen')
+      }
+    }
+    window.addEventListener('resize', resizeHandler)
+    resizeHandler()
+
+    this.dom.preferencesButton.addEventListener('click', () => {
+      this.dom.preferencesContainer.classList.remove('d-none')
+    })
+
+    this.dom.preferencesContainer.addEventListener('click', (e) => {
+      if (e.target == this.dom.preferencesContainer)
+        this.dom.preferencesContainer.classList.add('d-none')
+    })
+
+    this.dom.iframe.addEventListener('load', () => {
+      setTimeout(() => {
+        this.dom.preferencesContainer.classList.add('d-none')
+        this.dom.preferencesContainer.classList.remove('invisible')
+      }, 200) // I have no idea why, but when you hide this immediately, it breaks topbar layout
+    })
   }
 
   public update(update: DOMUpdate): void {

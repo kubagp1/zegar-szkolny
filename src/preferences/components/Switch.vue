@@ -28,10 +28,12 @@ export default Vue.extend({
       type: Object as PropType<Setting<boolean>>
     }
   },
-  data: () => ({
-    value: false,
-    firstFetch: true
-  }),
+  data() {
+    return {
+      value: false,
+      firstFetch: true
+    }
+  },
   mounted() {
     this.setting.getValue().then((value) => {
       this.value = value

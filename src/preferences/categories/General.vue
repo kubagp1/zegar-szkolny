@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <v-list>
-      <switch-setting :setting="$settings.showLogoOnStartup">
-    </v-list>
-  </div>
+  <section>
+    <switch-setting :setting="$settings.showLogoOnStartup"></switch-setting>
+  </section>
 </template>
 
 <script lang="ts">
@@ -13,7 +11,7 @@ import SwitchSetting from '../components/Switch.vue'
 
 export default Vue.extend({
   name: 'generalCategory',
-  components: {SwitchSetting}
+  components: { SwitchSetting }
 })
 </script>
 

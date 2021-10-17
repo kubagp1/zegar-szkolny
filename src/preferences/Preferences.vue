@@ -19,7 +19,10 @@
       </v-hover>
 
       <v-hover v-slot="{ hover }">
-        <v-icon :color="hover ? 'black' : undefined" style="cursor: pointer"
+        <v-icon
+          :color="hover ? 'black' : undefined"
+          style="cursor: pointer"
+          @click="close()"
           >mdi-close</v-icon
         >
       </v-hover>
@@ -99,7 +102,13 @@ export default Vue.extend({
       }
     ],
     selectedCategory: 'generalCategory'
-  })
+  }),
+  methods: {
+    close() {
+      // @ts-ignore
+      this.$top.close()
+    }
+  }
 })
 </script>
 

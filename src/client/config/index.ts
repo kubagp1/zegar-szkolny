@@ -50,6 +50,9 @@ class Config {
         getValue: (path: string) => {
           console.log('get', { path })
           return dotty.get(this.settings, path).value
+        },
+        close: () => {
+          ;(iframe.parentElement as HTMLDivElement).classList.add('d-none')
         }
       }
     })

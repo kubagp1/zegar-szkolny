@@ -98,12 +98,14 @@ export function makeSettings(parent: Parent): Settings {
       showProgressBar: {
         setValue: (newValue: boolean) =>
           parent.setValue('appearance.showProgressBar', newValue),
-        getValue: () => parent.getValue('appearance.showProgressBar')
+        getValue: () => parent.getValue('appearance.showProgressBar'),
+        title: 'Show progress bar'
       },
       showProgressBarTip: {
         setValue: (newValue: boolean) =>
           parent.setValue('appearance.showProgressBarTip', newValue),
-        getValue: () => parent.getValue('appearance.showProgressBarTip')
+        getValue: () => parent.getValue('appearance.showProgressBarTip'),
+        title: 'Show progress bar tip'
       }
     }
   }

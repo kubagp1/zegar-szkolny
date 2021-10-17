@@ -63,6 +63,36 @@ body {
       transform: translateY(-100%);
     }
   }
+
+  #open-preferences {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #open-fullscreen {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  #open-fullscreen,
+  #open-preferences {
+    color: grey;
+    padding: 8px;
+
+    &:hover {
+      color: whitesmoke;
+      cursor: pointer;
+    }
+  }
+}
+
+:root:fullscreen #open-fullscreen,
+:root:fullscreen #open-preferences,
+:root.fullscreen #open-fullscreen,
+:root.fullscreen #open-preferences {
+  opacity: 0%;
 }
 
 #preferences-container {
@@ -76,4 +106,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.invisible {
+  opacity: 0;
 }

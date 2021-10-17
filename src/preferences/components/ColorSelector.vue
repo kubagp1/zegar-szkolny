@@ -1,5 +1,17 @@
 <template>
-  <input type="color" class="color-input" v-model="value" />
+  <v-hover>
+    <template v-slot:default="{ hover }">
+      <input
+        type="color"
+        class="color-input rounded-pill transition-swing"
+        :class="{
+          'elevation-4': !hover,
+          'elevation-8': hover
+        }"
+        v-model="value"
+      />
+    </template>
+  </v-hover>
 </template>
 
 <script lang="ts">
@@ -36,5 +48,17 @@ export default Vue.extend({
 <style lang="less" scoped>
 .color-input {
   width: 100%;
+  height: 150%;
+  border-radius: 18px;
+  cursor: pointer;
+
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+  &::-webkit-color-swatch {
+    // border: 1px solid rgba(0, 0, 0, 0.12);
+    border: none;
+    border-radius: 18px;
+  }
 }
 </style>
