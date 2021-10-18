@@ -4,7 +4,8 @@ class Autoupdater {
   URL = new URL('VERSION.txt', window.location.origin)
 
   constructor() {
-    setInterval(this.checkForUpdates, 3600)
+    if (this.URL.hostname != 'localhost')
+      setInterval(this.checkForUpdates.bind(this), 3600 * 1000)
   }
 
   public async checkForUpdates() {

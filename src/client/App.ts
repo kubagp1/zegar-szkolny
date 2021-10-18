@@ -3,12 +3,14 @@ import DOM from './dom'
 import { DOMUpdate } from './dom'
 import Info from './info'
 import Config from './config'
+import Autoupdater from './autoupdater'
 
 interface App {
   timetable: Timetable
   dom: DOM
   info: Info
   config: Config
+  autoupdater: Autoupdater
   loopInterval: number
   timeOffset: number
 }
@@ -23,6 +25,7 @@ class App {
     this.dom = new DOM()
     this.info = new Info(this.timetable)
     this.config = new Config()
+    this.autoupdater = new Autoupdater()
 
     this.timeOffset = 0
 
