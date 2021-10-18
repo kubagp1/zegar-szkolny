@@ -26,7 +26,7 @@ jobs:
         run: npm run build
 
       - name: Set up autoupdater pt.2
-        run: echo "$RELEASE_VERSION" >| ./dist/VERSION.txt
+        run: echo "${GITHUB_REF#refs/*/}\"}" >| ./dist/VERSION.txt
 
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2.5.0
