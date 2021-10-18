@@ -8,12 +8,12 @@ class Autoupdater {
       setInterval(this.checkForUpdates.bind(this), 3600 * 1000)
   }
 
-  public async checkForUpdates() {
-    const latestVersion = await (
-      await fetch(this.URL.href, { cache: 'no-store' })
-    ).text()
-
-    if (latestVersion != currentVersion) this.reloadPage()
+  public checkForUpdates() {
+    fetch(this.URL.href, { cache: 'no-store' })
+      .then((response) => response.text())
+      .then((latestVersion) => {
+        if (latestVersion != currentVersion) this.reloadPage()
+      })
   }
 
   public reloadPage() {
