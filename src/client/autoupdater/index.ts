@@ -12,7 +12,7 @@ class Autoupdater {
     fetch(this.URL.href, { cache: 'no-store' })
       .then((response) => response.text())
       .then((latestVersion) => {
-        if (latestVersion != currentVersion) this.reloadPage()
+        if (latestVersion.trim() != currentVersion.trim()) this.reloadPage()
       })
   }
 
