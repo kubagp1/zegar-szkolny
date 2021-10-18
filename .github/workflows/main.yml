@@ -3,7 +3,7 @@ name: Deploy to Github Pages
 on:
   release:
     types: [published]
-    
+
   workflow_dispatch:
 
 jobs:
@@ -15,20 +15,19 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16.6.1'
-      
+
       - name: Set up environment
         run: npm install
 
       - name: Set up autoupdater
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-        run: 'echo "{\"currentVersion\": \"$RELEASE_VERSION\"}" >| ./src/client/autoupdater/currentVersion.json'
-        
+        run: 'echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV; echo "{\"currentVersion\"; \"$RELEASE_VERSION\"}" >| ./src/client/autoupdater/currentVersion.json'
+
       - name: Build
         run: npm run build
 
       - name: Set up autoupdater pt.2
         run: echo "$RELEASE_VERSION" >| ./dist/VERSION.txt
-        
+
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2.5.0
         with:
