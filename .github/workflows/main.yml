@@ -20,13 +20,13 @@ jobs:
         run: npm install
 
       - name: Set up autoupdater
-        run: 'echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV; echo "{\"currentVersion\"; \"$RELEASE_VERSION\"}" >| ./src/client/autoupdater/currentVersion.json'
+        run: 'echo "{\"currentVersion\": \"${GITHUB_REF#refs/*/}\"}" >| ./src/client/autoupdater/currentVersion.json'
 
       - name: Build
         run: npm run build
 
       - name: Set up autoupdater pt.2
-        run: echo "$RELEASE_VERSION" >| ./dist/VERSION.txt
+        run: echo "${GITHUB_REF#refs/*/}" >| ./dist/VERSION.txt
 
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2.5.0
