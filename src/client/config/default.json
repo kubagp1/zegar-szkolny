@@ -1,0 +1,23 @@
+{
+  "showLogoOnStartup": true,
+  "colors": {
+    "default": {
+      "clock": "#eeeeee",
+      "background": "#111111",
+      "progressBackground": "#24264d",
+      "progressFilled": "#e8cf43",
+      "progressTip": "#5a62e8"
+    },
+    "alternative": {
+      "clock": "#e8cf43",
+      "background": "#111111",
+      "progressBackground": "#24264d",
+      "progressFilled": "#e8cf43",
+      "progressTip": "#5a62e8"
+    }
+  },
+  "appearance": {
+    "showProgressBar": true,
+    "showProgressBarTip": true
+  }
+}

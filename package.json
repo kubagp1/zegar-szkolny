@@ -4,8 +4,8 @@
   "description": "Clock with progress bar.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "serve": "parcel src/index.html src/preferences.html",
+    "build": "parcel build src/index.html src/preferences.html"
   },
   "repository": {
     "type": "git",
@@ -30,7 +30,12 @@
     "vue-template-compiler": "^2.6.14"
   },
   "dependencies": {
+    "@mdi/font": "^6.2.95",
+    "dotty": "^0.1.1",
+    "object-resolve-path": "^1.1.1",
+    "penpal": "^6.1.0",
     "vue": "^2.6.14",
-    "vue-hot-reload-api": "^2.3.4"
+    "vue-hot-reload-api": "^2.3.4",
+    "vuetify": "^2.5.9"
   }
 }

@@ -2,12 +2,14 @@ import Timetable from './timetable'
 import DOM from './dom'
 import { DOMUpdate } from './dom'
 import Info from './info'
+import Config from './config'
 
 interface App {
   timetable: Timetable
   dom: DOM
   info: Info
-  loopInterval: NodeJS.Timer
+  config: Config
+  loopInterval: number
   timeOffset: number
 }
 
@@ -20,7 +22,8 @@ class App {
     this.timetable = new Timetable()
     this.dom = new DOM()
     this.info = new Info(this.timetable)
-    
+    this.config = new Config()
+
     this.timeOffset = 0
 
     this.loop()
@@ -60,6 +63,8 @@ class App {
     DOMUpdate.progress = this.timetable.getProgress(time)
 
     DOMUpdate.info = this.info.generate(time)
+
+    DOMUpdate.theme = this.timetable.onBreak(time) ? 'alternative' : 'default'
 
     this.dom.update(DOMUpdate)
   }

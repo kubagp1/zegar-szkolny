@@ -1,10 +1,4 @@
 :root {
-  --background-color: #111;
-  --clock-color: #eee;
-  --progress-background-color: #24264d;
-  --progress-filled-color: #e8cf43;
-  --progress-filled-tip: #5a62e8;
-
   font-family: Helvetica, Arial, sans-serif;
 }
 
@@ -13,7 +7,7 @@ body {
   padding: 0;
 }
 
-.container {
+.main-container {
   width: 100vw;
   height: 100vh;
 
@@ -46,7 +40,7 @@ body {
 
     .progress-filled {
       background-color: var(--progress-filled-color);
-      border-right-color: var(--progress-filled-tip);
+      border-right-color: var(--progress-tip-color);
 
       width: var(--width);
       height: 100%;
@@ -69,4 +63,55 @@ body {
       transform: translateY(-100%);
     }
   }
+
+  #open-preferences {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  #open-fullscreen {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  #open-fullscreen,
+  #open-preferences {
+    color: grey;
+    padding: 8px;
+
+    &:hover {
+      color: whitesmoke;
+      cursor: pointer;
+    }
+  }
+}
+
+:root:fullscreen #open-fullscreen,
+:root:fullscreen #open-preferences,
+:root.fullscreen #open-fullscreen,
+:root.fullscreen #open-preferences {
+  opacity: 0%;
+}
+
+#preferences-container {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  inset: 0 0;
+
+  background-color: rgba(0, 0, 0, 0.6);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.d-none {
+  display: none !important;
+}
+
+.invisible {
+  opacity: 0;
 }

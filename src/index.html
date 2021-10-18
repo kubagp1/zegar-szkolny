@@ -4,19 +4,34 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Clock and balls</title>
 
-    <script src="./index.ts" type="module" defer></script>
+    <script src="./client/index.ts" defer></script>
   </head>
   <body>
-    <div class="container">
+    <div class="main-container">
+      <span id="open-preferences">Preferences</span>
+      <span id="open-fullscreen">Fullscreen</span>
       <div class="clock">
-        <span id="hours"></span>:<span id="minutes"></span>
+        <span id="hours">21</span>:<span id="minutes">37</span>
       </div>
       <div class="progress-container">
         <div class="progress-filled"></div>
         <div class="progress-info">Lorem ipsum 34 amet</div>
       </div>
+    </div>
+
+    <div id="preferences-container" class="invisible">
+      <iframe
+        id="preferences"
+        src="/preferences.html"
+        width="850"
+        height="500"
+        frameborder="0"
+      >
+        There was a problem with loading preferences!
+      </iframe>
     </div>
   </body>
 </html>
