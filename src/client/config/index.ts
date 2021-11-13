@@ -5,6 +5,7 @@ import Settings from './settings'
 
 import DEFAULT_SETTINGS from './default.json'
 import Setting from './Setting'
+import App from '../App'
 
 interface Config {
   settings: Settings
@@ -13,7 +14,7 @@ interface Config {
 class Config {
   constructor() {
     this.settings = new Settings(DEFAULT_SETTINGS)
-    this.applySettings()
+    setTimeout(this.applySettings.bind(this), 0) // this line is executed while constructor for App hasn't ended, resulting in errors while trying to modify App object.
 
     this.connectToIframe()
   }

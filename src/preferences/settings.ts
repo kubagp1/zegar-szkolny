@@ -2,6 +2,7 @@ import Setting from './Setting'
 
 export default interface Settings {
   showLogoOnStartup: Setting<boolean>
+  timeOffset: Setting<number>
   colors: {
     default: {
       clock: Setting<string>
@@ -21,6 +22,7 @@ export default interface Settings {
   appearance: {
     showProgressBar: Setting<boolean>
     showProgressBarTip: Setting<boolean>
+    displayOffsetedTime: Setting<boolean>
   }
 }
 
@@ -36,6 +38,13 @@ export function makeSettings(parent: Parent): Settings {
         parent.setValue('showLogoOnStartup', newValue),
       getValue: async () => await parent.getValue('showLogoOnStartup'),
       title: 'Show logo on startup'
+    },
+    timeOffset: {
+      setValue: (newValue: number) => parent.setValue('timeOffset', newValue),
+      getValue: async () => await parent.getValue('timeOffset'),
+      title: 'Time offset',
+      subtitle:
+        'Time offset in miliseconds. If negative value is used time will we offseted backwards.'
     },
     colors: {
       default: {
@@ -106,6 +115,12 @@ export function makeSettings(parent: Parent): Settings {
           parent.setValue('appearance.showProgressBarTip', newValue),
         getValue: () => parent.getValue('appearance.showProgressBarTip'),
         title: 'Show progress bar tip'
+      },
+      displayOffsetedTime: {
+        setValue: (newValue: boolean) =>
+          parent.setValue('appearance.displayOffsetedTime', newValue),
+        getValue: () => parent.getValue('appearance.displayOffsetedTime'),
+        title: 'Display offseted time'
       }
     }
   }
