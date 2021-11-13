@@ -2,6 +2,9 @@
   <section>
     <switch-setting :setting="$settings.showLogoOnStartup"></switch-setting>
     <number-setting :setting="$settings.timeOffset"></number-setting>
+    <v-btn text color="error" @click="restoreDefaultConfig()">
+      Restore default settings
+    </v-btn>
   </section>
 </template>
 
@@ -13,7 +16,13 @@ import NumberSetting from '../components/Number.vue'
 
 export default Vue.extend({
   name: 'generalCategory',
-  components: { SwitchSetting, NumberSetting }
+  components: { SwitchSetting, NumberSetting },
+  methods: {
+    restoreDefaultConfig() {
+      // @ts-ignore
+      this.$top.restoreDefaultConfig()
+    }
+  }
 })
 </script>
 
