@@ -140,6 +140,10 @@ class Config {
         },
         close: () => {
           ;(iframe.parentElement as HTMLDivElement).classList.add('d-none')
+        },
+        restoreDefaultConfig: () => {
+          localStorage.removeItem('settings')
+          window.location.reload()
         }
       }
     })
