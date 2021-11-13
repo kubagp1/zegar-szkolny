@@ -44,9 +44,9 @@ export default Vue.extend({
     })
   },
   watch: {
-    value(newValue: number) {
+    value(newValue: string) {
       if (this.firstFetch) this.firstFetch = false
-      else this.setting.setValue(newValue)
+      else this.setting.setValue(parseInt(newValue))
     }
   }
 })

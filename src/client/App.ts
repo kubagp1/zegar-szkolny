@@ -66,8 +66,6 @@ class App {
 
     var DOMUpdate: DOMUpdate = {}
 
-    console.log(this)
-
     const displayedTime = this.config.settings.appearance.displayOffsetedTime
       .value
       ? time
