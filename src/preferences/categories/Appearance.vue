@@ -6,6 +6,9 @@
     <switch-setting
       :setting="$settings.appearance.showProgressBarTip"
     ></switch-setting>
+    <switch-setting
+      :setting="$settings.appearance.displayOffsetedTime"
+    ></switch-setting>
   </section>
 </template>
 

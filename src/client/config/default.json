@@ -1,5 +1,6 @@
 {
   "showLogoOnStartup": true,
+  "timeOffset": 0,
   "colors": {
     "default": {
       "clock": "#eeeeee",
@@ -18,6 +19,7 @@
   },
   "appearance": {
     "showProgressBar": true,
-    "showProgressBarTip": true
+    "showProgressBarTip": true,
+    "displayOffsetedTime": true
   }
 }

@@ -1,7 +1,9 @@
+import App from '../App'
 import Setting from './Setting'
 
 interface Settings {
   showLogoOnStartup: Setting<boolean>
+  timeOffset: Setting<number>
   colors: {
     default: {
       clock: Setting<string>
@@ -21,11 +23,13 @@ interface Settings {
   appearance: {
     showProgressBar: Setting<boolean>
     showProgressBarTip: Setting<boolean>
+    displayOffsetedTime: Setting<boolean>
   }
 }
 
 export interface SettingsValues {
   showLogoOnStartup: boolean
+  timeOffset: number
   colors: {
     default: {
       clock: string
@@ -45,6 +49,7 @@ export interface SettingsValues {
   appearance: {
     showProgressBar: boolean
     showProgressBarTip: boolean
+    displayOffsetedTime: boolean
   }
 }
 
@@ -58,6 +63,13 @@ class Settings {
       ...new Setting(config.showLogoOnStartup),
       applySetting() {
         console.warn('missing implementation!')
+      }
+    }
+
+    this.timeOffset = {
+      ...new Setting(config.timeOffset),
+      applySetting() {
+        window.app.timeOffset = this.value
       }
     }
 
@@ -132,15 +144,33 @@ class Settings {
       showProgressBar: {
         ...new Setting(config.appearance.showProgressBar),
         applySetting() {
-          if (this.value == false) (document.querySelector('.progress-container') as HTMLDivElement).style.setProperty('display', 'none')
-          else (document.querySelector('.progress-container') as HTMLDivElement).style.setProperty('display', 'initial')
+          if (this.value == false)
+            (
+              document.querySelector('.progress-container') as HTMLDivElement
+            ).style.setProperty('display', 'none')
+          else
+            (
+              document.querySelector('.progress-container') as HTMLDivElement
+            ).style.setProperty('display', 'initial')
         }
       },
       showProgressBarTip: {
         ...new Setting(config.appearance.showProgressBarTip),
         applySetting() {
-          if (this.value == false) (document.querySelector('.progress-filled') as  HTMLDivElement).style.setProperty('border-right-style', 'none')
-          else (document.querySelector('.progress-filled') as  HTMLDivElement).style.setProperty('border-right-style', 'solid')
+          if (this.value == false)
+            (
+              document.querySelector('.progress-filled') as HTMLDivElement
+            ).style.setProperty('border-right-style', 'none')
+          else
+            (
+              document.querySelector('.progress-filled') as HTMLDivElement
+            ).style.setProperty('border-right-style', 'solid')
+        }
+      },
+      displayOffsetedTime: {
+        ...new Setting(config.appearance.displayOffsetedTime),
+        applySetting() {
+          window.app.iterate()
         }
       }
     }

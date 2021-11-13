@@ -29,7 +29,7 @@ class App {
 
     this.timeOffset = 0
 
-    this.loop()
+    setTimeout(this.iterate.bind(this), 1)
     this.loopInterval = setInterval(this.loop.bind(this), 1000)
   }
 
@@ -44,7 +44,15 @@ class App {
   }
 
   private getTime(): number {
-    return (secondsSinceMidnight() + this.timeOffset) % 86400
+    return (secondsSinceMidnight() + this.timeOffset / 1000) % 86400
+  }
+
+  /**
+   *
+   * @returns Time not affected by timeOffset config.
+   */
+  private getRealTime(): number {
+    return secondsSinceMidnight()
   }
 
   private loop(): void {
@@ -58,8 +66,15 @@ class App {
 
     var DOMUpdate: DOMUpdate = {}
 
-    DOMUpdate.hours = Math.floor(time / 3600)
-    DOMUpdate.minutes = Math.floor((time / 60) % 60)
+    console.log(this)
+
+    const displayedTime = this.config.settings.appearance.displayOffsetedTime
+      .value
+      ? time
+      : this.getRealTime()
+
+    DOMUpdate.hours = Math.floor(displayedTime / 3600)
+    DOMUpdate.minutes = Math.floor((displayedTime / 60) % 60)
       .toString()
       .padStart(2, '0')
 
@@ -70,6 +85,13 @@ class App {
     DOMUpdate.theme = this.timetable.onBreak(time) ? 'alternative' : 'default'
 
     this.dom.update(DOMUpdate)
+  }
+
+  /**
+   * Reruns main loop (mostly to apply updates to config)
+   */
+  public iterate(): void {
+    this.loop()
   }
 }
 
