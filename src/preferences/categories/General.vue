@@ -19,7 +19,6 @@ export default Vue.extend({
   components: { SwitchSetting, NumberSetting },
   methods: {
     restoreDefaultConfig() {
-      // @ts-ignore
       this.$top.restoreDefaultConfig()
     }
   }

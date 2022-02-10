@@ -58,7 +58,7 @@ export function constructTimetable(unvalidatedTimetable: any[]): Lesson[] {
   // validate, that there are no intersecting lessons
   for (let i = 1; i < relativeTimetable.length; i++) {
     if (relativeTimetable[i].start < relativeTimetable[i - 1].end) {
-      throw Error('Intersecting lessons are present in the timetable.')
+      throw Error('Overlapping lessons are present in the timetable.')
     }
   }
 

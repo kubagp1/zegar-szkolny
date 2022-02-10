@@ -80,9 +80,15 @@ import Vue from 'vue'
 import GeneralCategory from './categories/General.vue'
 import ColorsCategory from './categories/Colors.vue'
 import AppearanceCategory from './categories/Appearance.vue'
+import TimetableCategory from './categories/Timetable.vue'
 
 export default Vue.extend({
-  components: { GeneralCategory, ColorsCategory, AppearanceCategory },
+  components: {
+    GeneralCategory,
+    ColorsCategory,
+    AppearanceCategory,
+    TimetableCategory
+  },
   data: () => ({
     categories: [
       {
@@ -94,6 +100,11 @@ export default Vue.extend({
         name: 'Colors',
         icon: 'mdi-palette',
         component: 'colorsCategory'
+      },
+      {
+        name: 'Timetable',
+        icon: 'mdi-timetable',
+        component: 'timetableCategory'
       },
       {
         name: 'Appearance',

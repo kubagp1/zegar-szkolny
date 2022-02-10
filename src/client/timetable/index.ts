@@ -39,8 +39,12 @@ class Timetable {
     } catch (error) {
       console.error(error)
 
-      this.lessons = constructTimetable(DEFAULT_TIMETABLE)
+      this.restoreDeafultTimetable()
     }
+  }
+
+  public restoreDeafultTimetable() {
+    this.lessons = constructTimetable(DEFAULT_TIMETABLE)
   }
 
   private loadFromStorage(): Lesson[] {
@@ -57,6 +61,18 @@ class Timetable {
     } else throw Error('Failed to load timetable from localStorage.')
 
     return lessons
+  }
+
+  public load(lessons: LessonPart[]) {
+    this.lessons = constructTimetable(lessons)
+    this.saveToStorage()
+  }
+
+  public saveToStorage() {
+    localStorage.setItem('timetable', JSON.stringify(this.lessons.map(lesson => ({
+      start: lesson.absoluteStart,
+      end: lesson.absoluteEnd
+    }))))
   }
 
   private getRelativeTime(seconds: number) {
@@ -108,7 +124,7 @@ class Timetable {
     return !this.onBreak(absoluteSeconds)
   }
 
-  /** Returns number between 0..1 that indicated progress in current lesson or break */
+  /** Returns number between 0..1 that indicates progress in current lesson or break */
   public getProgress(absoluteSeconds: number): number {
     const seconds = this.getRelativeTime(absoluteSeconds)
 

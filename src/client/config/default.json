@@ -3,8 +3,8 @@
   "timeOffset": 0,
   "colors": {
     "default": {
-      "clock": "#eeeeee",
-      "background": "#111111",
+      "clock": "#ffffff",
+      "background": "#000000",
       "progressBackground": "#24264d",
       "progressFilled": "#e8cf43",
       "progressTip": "#5a62e8"

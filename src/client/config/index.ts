@@ -4,6 +4,7 @@ import dotty from 'dotty'
 import Settings from './settings'
 
 import DEFAULT_SETTINGS from './default.json'
+import Timetable from '../timetable'
 
 interface Config {
   settings: Settings
@@ -54,7 +55,10 @@ function validateSettings(settings: any): boolean {
 }
 
 class Config {
-  constructor() {
+  timetable: Timetable
+  constructor(timetable: Timetable) {
+    this.timetable = timetable
+
     const settingsFromLocalStorage = getSettingsFromLocalStorage()
     if (validateSettings(settingsFromLocalStorage)) {
       this.settings = new Settings(settingsFromLocalStorage)
@@ -144,6 +148,15 @@ class Config {
         restoreDefaultConfig: () => {
           localStorage.removeItem('settings')
           window.location.reload()
+        },
+        getTimetable: ()=> {
+          return this.timetable.lessons
+        },
+        setTimetable: (timetable: any)=> {
+          this.timetable.load(timetable)
+        },
+        restoreDefaultTimetable: ()=> {
+          this.timetable.restoreDeafultTimetable()
         }
       }
     })
