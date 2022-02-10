@@ -24,7 +24,7 @@ class App {
     this.timetable = new Timetable()
     this.dom = new DOM()
     this.info = new Info(this.timetable)
-    this.config = new Config()
+    this.config = new Config(this.timetable)
     this.autoupdater = new Autoupdater()
 
     this.timeOffset = 0
